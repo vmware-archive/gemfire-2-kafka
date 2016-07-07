@@ -19,17 +19,17 @@ $ bin/kafka-topics.sh --create --zookeeper localhost:2181 \
 
 Step5: Maven package the project into a jar
 $ mvn package
-Must be packaged because the GemFire startup script will copy it into the deployment directory so that the listeners will be available to GemFire
+- Must be packaged because the GemFire startup script will copy it into the deployment directory so that the listeners will be available to GemFire
 
 Step6: Start GemFire cluster
 grid $ . startall.sh
 
-Starting GemFire
-- Need to cp kafka jar, project client jar into cluster config directory AND put into server classpath
-- Need to define kafka properties and load them into the kafka client. In this project, the kafka client is the AyncEventListener
+Notes on what startall.sh does:
+- copies project client jar into cluster config directory AND puts both kafka jar and the project into the classpath
+- references kafka properties and loads them into the kafka client. In this project, the kafka client is the AyncEventListener
 - PDX persistence must be turned on for serialization
 
 What puzzles me:
-1) Kafka is advertised to continue throughput even with slow consumers. However, this is not my experience. I put a slow consumer to print to console every record and the producer slowed by about 1/3. TODO
-2) Can I control the partitioning to align with GemFire’s partitions, e.g.?
-3) Design for recoverability/ idempotency since kafka is not transactional
+- Kafka is advertised to continue throughput even with slow consumers. However, this is not my experience. I put a slow consumer to print to console every record and the producer slowed by about 1/3. TODO
+- Can I control the partitioning to align with GemFire’s partitions, e.g.?
+- Design for recoverability/ idempotency since kafka is not transactional
