@@ -1,4 +1,4 @@
-# gemfire-2-kafka
+<h1> VMware has ended active development of this project, this repository will no longer be updated.</h1><br># gemfire-2-kafka
 Sample that writes to Kafka from GemFire using GemFire's Async Eventing
 
 
